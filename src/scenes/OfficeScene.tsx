@@ -13,8 +13,9 @@ import ZombiePlant from '../entities/ZombiePlant';
 import Player from '../entities/Player';
 import Workstation from '../entities/Workstation';
 import spriteData from '../spriteData';
+import { Threats } from '../scripts/threatCounter';
 
-const mapData = mapDataString(`
+const str = `
 # # # # # # # # # # # # # # # # #
 # · W T # T · · W T · W · · · T #
 # · · · · · · · · · · · · · · o ·
@@ -23,9 +24,16 @@ const mapData = mapDataString(`
 # C C C # · · · Z · · · · · · · #
 # o · · · · · · · · · · · · · o #
 # # # # # # # # # # # # # # # # #
-`);
-const threatCounter = 0;
+`;
+const mapData = mapDataString(str);
 
+function countThreatsInScene(map) {
+    const arr = map.split('');
+    for (const a in arr) {
+        if (['W', 'Z'].some(e => e.includes(arr[a]))) Threats.add();
+    }
+}
+countThreatsInScene(str);
 const resolveMapTile: TileMapResolver = (type, x, y) => {
     const key = `${x}-${y}`;
     const position = { x, y };
@@ -86,8 +94,8 @@ const resolveMapTile: TileMapResolver = (type, x, y) => {
     }
 };
 
+const controlled = Threats.allGone();
 export default function OfficeScene() {
-    const controlled = threatCounter === 0;
     return (
         <>
             <GameObject name="map">

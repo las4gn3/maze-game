@@ -25,8 +25,9 @@ function WorkstationScript() {
 }
 
 export default function Workstation(props: GameObjectProps) {
+    const name = `workstation-${props.x}-${props.y}`;
     return (
-        <GameObject {...props}>
+        <GameObject {...props} name={name} persisted>
             <Sprite {...spriteData.objects} state="workstation-1" />
             <Collider />
             <Interactable />

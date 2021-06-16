@@ -1,21 +1,20 @@
 import React from 'react';
 import Collider, { TriggerEvent } from '../@core/Collider';
 import GameObject, { GameObjectProps } from '../@core/GameObject';
-import { useSound } from '../@core/Sound';
 import Sprite from '../@core/Sprite';
 import useGameObject from '../@core/useGameObject';
 import useGameObjectEvent from '../@core/useGameObjectEvent';
-import soundData from '../soundData';
 import spriteData from '../spriteData';
 
+let score = 0;
 function DisableOnTriggerScript() {
     const { getRef } = useGameObject();
-    const playSfx = useSound(soundData.eating);
 
     useGameObjectEvent<TriggerEvent>('trigger', other => {
         if (other.name === 'player') {
             getRef().setDisabled(true);
-            playSfx();
+            score += 100;
+            console.log(score);
         }
     });
 

@@ -1,3 +1,5 @@
+import { Threats } from '../scripts/threatCounter';
+
 const actions = ['club', 'disarm', 'run', 'trim', 'debug'];
 
 export default function ThreatScript(name = 'workstation', correctAction = 'debug') {
@@ -23,6 +25,7 @@ export default function ThreatScript(name = 'workstation', correctAction = 'debu
         }
         if (input === correctAction) {
             outputMessage = `Correct action: ${input}`;
+            Threats.remove();
             return resolve(outputMessage);
         }
         const error = `Wrong action: ${input}`;
