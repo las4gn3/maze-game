@@ -7,19 +7,15 @@ import spriteData from '../spriteData';
 import useGameObject from '../@core/useGameObject';
 import useGameObjectEvent from '../@core/useGameObjectEvent';
 import Moveable from '../@core/Moveable';
-import { useSound } from '../@core/Sound';
-import soundData from '../soundData';
 import ThreatScript from './ThreatInteraction';
 
 function ZombiePlantScript() {
     const { getRef } = useGameObject();
-    const playSfx = useSound(soundData.eating);
 
     useGameObjectEvent<InteractionEvent>('interaction', () => {
         ThreatScript('zombie plant', 'trim')
             .then(() => {
                 getRef().setDisabled(true);
-                playSfx();
             })
             .catch(err => {
                 console.log(err);

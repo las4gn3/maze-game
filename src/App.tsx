@@ -7,7 +7,6 @@ import SceneManager from './@core/SceneManager';
 import useWindowSize from './@core/useWindowSize';
 import OfficeScene from './scenes/OfficeScene';
 import OtherScene from './scenes/OtherScene';
-import soundData from './soundData';
 import spriteData from './spriteData';
 import globalStyles from './styles/global';
 
@@ -23,7 +22,6 @@ const styles = {
 
 const urls = [
     ...Object.values(spriteData).map(data => data.src),
-    ...Object.values(soundData).map(data => data.src),
     // flatten
 ].reduce<string[]>((acc, val) => acc.concat(val), []);
 

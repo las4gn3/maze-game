@@ -9,6 +9,7 @@ import { mapDataString } from '../@core/utils/mapUtils';
 import CoffeeMachine from '../entities/CoffeeMachine';
 import PizzaPickup from '../entities/PizzaPickup';
 import Plant from '../entities/Plant';
+import ZombiePlant from '../entities/ZombiePlant';
 import Player from '../entities/Player';
 import Workstation from '../entities/Workstation';
 import spriteData from '../spriteData';
@@ -19,10 +20,11 @@ const mapData = mapDataString(`
 # · · · · · · · · · · · · · · o ·
 # o · · # · · · # # # # · · # # #
 # # # # # · · · # W o W · · T W #
-# C C C # · · · T · · · · · · · #
+# C C C # · · · Z · · · · · · · #
 # o · · · · · · · · · · · · · o #
 # # # # # # # # # # # # # # # # #
 `);
+const threatCounter = 0;
 
 const resolveMapTile: TileMapResolver = (type, x, y) => {
     const key = `${x}-${y}`;
@@ -72,12 +74,20 @@ const resolveMapTile: TileMapResolver = (type, x, y) => {
                     <Plant {...position} />
                 </Fragment>
             );
+        case 'Z':
+            return (
+                <Fragment key={key}>
+                    {floor}
+                    <ZombiePlant {...position} />
+                </Fragment>
+            );
         default:
             return null;
     }
 };
 
 export default function OfficeScene() {
+    const controlled = threatCounter === 0;
     return (
         <>
             <GameObject name="map">
@@ -87,7 +97,12 @@ export default function OfficeScene() {
             <GameObject x={16} y={5}>
                 <Collider />
                 <Interactable />
-                <ScenePortal name="exit" enterDirection={[-1, 0]} target="other/start" />
+                <ScenePortal
+                    name="exit"
+                    enterDirection={[-1, 0]}
+                    target="other/start"
+                    controlled={controlled}
+                />
             </GameObject>
             <Player x={6} y={3} />
         </>

@@ -10,16 +10,13 @@ import {
     WillMoveEvent,
 } from '../@core/Moveable';
 import { useScene } from '../@core/Scene';
-import Sound from '../@core/Sound';
 import { SpriteRef } from '../@core/Sprite';
 import useGameLoop from '../@core/useGameLoop';
 import useGameObject from '../@core/useGameObject';
 import useGameObjectEvent from '../@core/useGameObjectEvent';
-import soundData from '../soundData';
 import spriteData from '../spriteData';
 
 interface Props {
-    interactionSound?: React.ReactElement;
     children: React.ReactNode;
 }
 
@@ -94,7 +91,6 @@ export default function CharacterScript({ children }: Props) {
                         offset={{ x: 0, y: characterOffsetY }}
                         onIteration={() => removeInstance()}
                     />
-                    <Sound {...soundData.footstep} />
                 </GameObject>
             );
         },

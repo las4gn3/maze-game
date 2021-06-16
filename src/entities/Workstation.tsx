@@ -7,18 +7,14 @@ import useGameObject from '../@core/useGameObject';
 import useGameObjectEvent from '../@core/useGameObjectEvent';
 import spriteData from '../spriteData';
 import ThreatScript from './ThreatInteraction';
-import { useSound } from '../@core/Sound';
-import soundData from '../soundData';
 
 function WorkstationScript() {
     const { getRef } = useGameObject();
-    const playSfx = useSound(soundData.eating);
 
     useGameObjectEvent<InteractionEvent>('interaction', () => {
         ThreatScript()
             .then(() => {
                 getRef().setDisabled(true);
-                playSfx();
             })
             .catch(err => {
                 console.log(err);
