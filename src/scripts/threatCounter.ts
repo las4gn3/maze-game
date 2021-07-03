@@ -12,7 +12,7 @@ class ThreatCounter {
     }
 
     allGone(): boolean {
-        return this.threats === 0;
+        return this.threats <= 0;
     }
 
     print(): void {

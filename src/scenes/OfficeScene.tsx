@@ -28,6 +28,7 @@ const str = `
 const mapData = mapDataString(str);
 
 function countThreatsInScene(map) {
+    Threats.reset();
     const arr = map.split('');
     for (const a in arr) {
         if (['W', 'Z'].some(e => e.includes(arr[a]))) Threats.add();
@@ -94,7 +95,6 @@ const resolveMapTile: TileMapResolver = (type, x, y) => {
     }
 };
 
-const controlled = Threats.allGone();
 export default function OfficeScene() {
     return (
         <>
@@ -109,7 +109,7 @@ export default function OfficeScene() {
                     name="exit"
                     enterDirection={[-1, 0]}
                     target="other/start"
-                    controlled={controlled}
+                    controlled
                 />
             </GameObject>
             <Player x={6} y={3} />
