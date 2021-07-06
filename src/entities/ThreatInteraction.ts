@@ -1,4 +1,4 @@
-import { Threats } from '../scripts/threatCounter';
+import { Score } from '../scripts/score';
 
 const actions = ['trim', 'debug', 'run'];
 
@@ -26,7 +26,7 @@ ${actions.join(', ')}`;
         }
         if (input === correctAction) {
             outputMessage = `Correct action: ${input}!`;
-            Threats.remove();
+            Score.removeThreat();
             return resolve(outputMessage);
         }
         return reject(alert(`Wrong action: "${input}"! Try again.`));

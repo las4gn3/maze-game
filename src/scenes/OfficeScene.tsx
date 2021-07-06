@@ -6,32 +6,24 @@ import ScenePortal from '../@core/ScenePortal';
 import Sprite from '../@core/Sprite';
 import TileMap, { TileMapResolver } from '../@core/TileMap';
 import { mapDataString } from '../@core/utils/mapUtils';
-import CoffeeMachine from '../entities/CoffeeMachine';
 import PizzaPickup from '../entities/PizzaPickup';
-import Plant from '../entities/Plant';
 import ZombiePlant from '../entities/ZombiePlant';
 import Player from '../entities/Player';
 import Workstation from '../entities/Workstation';
 import spriteData from '../spriteData';
-import { Threats } from '../scripts/threatCounter';
+import { Score } from '../scripts/score';
+import { Room } from '../scripts/mazeRooms';
 
-const str = `
-# # # # # # # # # # # # # # # # #
-# · W T # T · · W T · W · · · T #
-# · · · · · · · · · · · · · · o ·
-# o · · # · · · # # # # · · # # #
-# # # # # · · · # W o W · · T W #
-# C C C # · · · Z · · · · · · · #
-# o · · · · · · · · · · · · · o #
-# # # # # # # # # # # # # # # # #
-`;
+Room.seedNewRoom();
+
+const str = Room.returnCurrentRoom();
 const mapData = mapDataString(str);
 
 function countThreatsInScene(map) {
-    Threats.reset();
+    Score.reset();
     const arr = map.split('');
     for (const a in arr) {
-        if (['W', 'Z'].some(e => e.includes(arr[a]))) Threats.add();
+        if (['W', 'Z'].some(e => e.includes(arr[a]))) Score.addThreat();
     }
 }
 countThreatsInScene(str);
@@ -67,20 +59,6 @@ const resolveMapTile: TileMapResolver = (type, x, y) => {
                 <Fragment key={key}>
                     {floor}
                     <Workstation {...position} />
-                </Fragment>
-            );
-        case 'C':
-            return (
-                <Fragment key={key}>
-                    {floor}
-                    <CoffeeMachine {...position} />
-                </Fragment>
-            );
-        case 'T':
-            return (
-                <Fragment key={key}>
-                    {floor}
-                    <Plant {...position} />
                 </Fragment>
             );
         case 'Z':

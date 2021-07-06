@@ -8,12 +8,11 @@ import TileMap, { TileMapResolver } from '../@core/TileMap';
 import { mapDataString } from '../@core/utils/mapUtils';
 import Player from '../entities/Player';
 import spriteData from '../spriteData';
-import ZombiePlant from '../entities/ZombiePlant';
 
 const mapData = mapDataString(`
 # # # # # #
 # · · · · #
-· · Z · · #
+· · · · · ·
 # · · · · #
 # # # # # #
 `);
@@ -30,13 +29,6 @@ const resolveMapTile: TileMapResolver = (type, x, y) => {
     switch (type) {
         case '·':
             return floor;
-        case 'Z':
-            return (
-                <Fragment key={key}>
-                    {floor}
-                    <ZombiePlant {...position} />
-                </Fragment>
-            );
         case '#':
             return (
                 <GameObject key={key} {...position} layer="wall">

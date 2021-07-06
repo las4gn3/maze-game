@@ -6,15 +6,12 @@ import useGameObject from '../@core/useGameObject';
 import useGameObjectEvent from '../@core/useGameObjectEvent';
 import spriteData from '../spriteData';
 
-let score = 0;
 function DisableOnTriggerScript() {
     const { getRef } = useGameObject();
 
     useGameObjectEvent<TriggerEvent>('trigger', other => {
         if (other.name === 'player') {
             getRef().setDisabled(true);
-            score += 100;
-            console.log(score);
         }
     });
 

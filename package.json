@@ -31,9 +31,11 @@
   "dependencies": {
     "@emotion/core": "^10.0.22",
     "animejs": "^3.1.0",
+    "babel-preset-es2015": "^6.0.15",
     "drei": "^0.0.54",
     "easystarjs": "^0.4.3",
     "fast-simplex-noise": "3.2.0",
+    "fs": "0.0.1-security",
     "git": "^0.1.5",
     "immer": "^6.0.3",
     "react": "^16.13.0",
