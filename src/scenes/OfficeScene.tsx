@@ -11,7 +11,7 @@ import ZombiePlant from '../entities/ZombiePlant';
 import Player from '../entities/Player';
 import Workstation from '../entities/Workstation';
 import spriteData from '../spriteData';
-import { Score } from '../scripts/score';
+import Score from '../scripts/score';
 import { Room } from '../scripts/mazeRooms';
 
 Room.seedNewRoom();
@@ -20,7 +20,6 @@ const str = Room.returnCurrentRoom();
 const mapData = mapDataString(str);
 
 function countThreatsInScene(map) {
-    Score.reset();
     const arr = map.split('');
     for (const a in arr) {
         if (['W', 'Z'].some(e => e.includes(arr[a]))) Score.addThreat();

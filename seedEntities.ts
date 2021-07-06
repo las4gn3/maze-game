@@ -13,7 +13,7 @@ function placeEntities(mapString, percent, type) {
     });
     return newMap.join(' ');
 }
-export const seedEntities = (mapString, percent = 10) => {
+export const seedEntities = (mapString, percent = 1) => {
     mapString = placeEntities(mapString, percent, 'W');
     mapString = placeEntities(mapString, percent, 'Z');
     mapString = placeEntities(mapString, percent, 'o');

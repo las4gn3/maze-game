@@ -1,4 +1,4 @@
-import { Score } from '../scripts/score';
+import Score from '../scripts/score';
 
 const actions = ['trim', 'debug', 'run'];
 

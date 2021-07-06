@@ -7,17 +7,25 @@ import useGameEvent from './useGameEvent';
 import useGameObject from './useGameObject';
 import useInteraction from './useInteraction';
 import useSceneManager from './useSceneManager';
-import { Score } from '../scripts/score';
+import Score from '../scripts/score';
 
-const scoreMessage = `
-Congratulations, you found the exit!
+function refreshPage() {
+    window.location.reload();
+}
+function getScoreMessage(): string {
+    const scoreMessage = `
+    Congratulations, you found the exit!
+    
+    Threats defeated: ${Score.returnThreats()}
+    
+    Treasures picked up: ${Score.returnTreasure()}
+    
+    Total score: ${Score.returnScore()}
+    `;
 
-Threats defeated: ${Score.returnThreats()}
+    return scoreMessage;
+}
 
-Treasures picked up: ${Score.returnTreasure()}
-
-Total score: ${Score.returnScore()}
-`;
 const leavingErrorMsg = `
 You can't leave the room until all threats are dealt with!
 
@@ -70,15 +78,15 @@ export default function ScenePortal({
     });
 
     useInteraction(async ref => {
+        if (ref.name !== 'player') return;
         if (controlled && !Score.allGoneThreat()) {
             window.alert(leavingErrorMsg);
             return;
         }
         if (controlled && Score.allGoneThreat()) {
-            window.alert(scoreMessage);
-            return;
+            window.alert(getScoreMessage());
+            refreshPage();
         }
-        if (ref.name !== 'player') return;
         api.port();
     });
 

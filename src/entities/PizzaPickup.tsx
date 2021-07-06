@@ -5,6 +5,7 @@ import Sprite from '../@core/Sprite';
 import useGameObject from '../@core/useGameObject';
 import useGameObjectEvent from '../@core/useGameObjectEvent';
 import spriteData from '../spriteData';
+import Score from '../scripts/score';
 
 function DisableOnTriggerScript() {
     const { getRef } = useGameObject();
@@ -12,6 +13,7 @@ function DisableOnTriggerScript() {
     useGameObjectEvent<TriggerEvent>('trigger', other => {
         if (other.name === 'player') {
             getRef().setDisabled(true);
+            Score.treasurePickup();
         }
     });
 
