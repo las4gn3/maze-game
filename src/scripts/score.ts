@@ -9,14 +9,11 @@ class ScoreScript {
 
     addThreat(): void {
         this.threats++;
-        console.log(`added. Current: ${this.threats}`);
     }
 
     removeThreat(): void {
         this.threats--;
         this.defeatedThreats++;
-        console.log(`removed. Remaining: ${this.threats}`);
-        console.log(`Score: ${this.score}`);
     }
 
     allGoneThreat(): boolean {
@@ -26,17 +23,13 @@ class ScoreScript {
     treasurePickup(): void {
         this.score += 100;
         this.treasures++;
-        console.log(`Score: ${this.score}`);
-        console.log(`treasures: ${this.treasures}`);
     }
 
     returnScore(): number {
-        console.log(`score: ${this.score}`);
         return this.score;
     }
 
     returnTreasure(): number {
-        console.log(`treasures: ${this.treasures}`);
         return this.treasures;
     }
 
